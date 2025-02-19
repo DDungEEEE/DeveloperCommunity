@@ -17,13 +17,14 @@ public class Users {
 
     }
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID userId;
 
     @Column(name = "user_name")
     private String userName;
 
-    @Column(name = "user_enamil")
+    @Column(name = "user_email")
     private String userEmail;
 
     @Column(name = "user_password")
