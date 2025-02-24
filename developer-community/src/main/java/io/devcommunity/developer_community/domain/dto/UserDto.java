@@ -26,11 +26,13 @@ public interface UserDto {
                     .userName(this.userName)
                     .userEmail(this.userEmail)
                     .userNickname(this.userNickname)
+                    .userPassword(this.userPassword)
                     .role(this.role)
                     .build();
         }
     }
 
+    @Data
     @Builder
     class Result{
         private UUID userId;

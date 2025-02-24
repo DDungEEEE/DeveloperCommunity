@@ -13,8 +13,6 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
 
-import static org.springdoc.core.extractor.DelegatingMethodParameter.customize;
-
 @Configuration
 public class SwaggerConfig {
 
@@ -31,8 +29,7 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI openAPI(){
         return new OpenAPI()
-                .info(new Info().title("JWT API")
-                        .description("API Documentation"))
+                .info(new Info().title("Developer-Community Swagger Api Document"))
                 .addSecurityItem(new SecurityRequirement().addList("bearerAuth"))
                 .components(new Components()
                         .addSecuritySchemes("bearerAuth", new SecurityScheme()
@@ -42,6 +39,7 @@ public class SwaggerConfig {
                 .servers(List.of(
                         new Server().url("http://localhost:30000")));
     }
+
 
     private Parameter createHeader(String name){
         return new Parameter()
