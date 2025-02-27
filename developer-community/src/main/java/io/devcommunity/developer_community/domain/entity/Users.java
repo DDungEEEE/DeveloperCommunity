@@ -17,7 +17,6 @@ public class Users {
             BACKEND, FRONTEND, PM, DESIGNER, MOBILE, ETC
     }
 
-
     @Id
     @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -36,7 +35,7 @@ public class Users {
     private String userNickname;
 
     @Column(name = "user_role")
-    private Role role;
+    private Role userRole;
 
     @Column(name = "user_refersh_token")
     private String userRefreshToken;

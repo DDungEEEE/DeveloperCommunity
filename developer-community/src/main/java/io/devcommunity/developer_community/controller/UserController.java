@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     private final UsersService usersService;
 
-    @Operation(summary = "사용자 conroller")
+    @Operation(summary = "사용자 controller")
     @PostMapping
     public UserDto.Result signUp(@RequestBody UserDto.Create userCreate){
         return usersService.signUpUser(userCreate);
