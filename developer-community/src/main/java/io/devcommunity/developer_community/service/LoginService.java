@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -14,7 +15,6 @@ import java.util.concurrent.TimeUnit;
 public class LoginService {
 
     private final RedisTemplate<String, String> redisTemplate;
-    private final UsersService usersService;
 
     @Value("${ACCESS_TOKEN_EXPIRATION_TIME}")
     private int acTokenExTime;
@@ -22,7 +22,7 @@ public class LoginService {
     // 이미 로그인 중인 사용자가 있는지 확인
     public boolean alreadyLoggedUser(String userId){
         String findUser = redisTemplate.opsForValue().get(userId);
-        return !findUser.isEmpty();
+        return findUser != null;
     }
 
     // 유저 로그인 시 Redis 저장소에 userId, AccessToken 저장

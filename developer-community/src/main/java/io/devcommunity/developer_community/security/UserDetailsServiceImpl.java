@@ -27,6 +27,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 //            return new UserDetailsImpl(users);
 //        }
 
+        log.error("usrename : {}", username);
         Optional<Users> findUsers = usersRepository.findUsersByUserName(username);
 
         if(findUsers.isEmpty()){

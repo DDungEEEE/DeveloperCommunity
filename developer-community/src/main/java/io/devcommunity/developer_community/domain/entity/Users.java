@@ -1,10 +1,7 @@
 package io.devcommunity.developer_community.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.UUID;
 
@@ -39,5 +36,9 @@ public class Users {
 
     @Column(name = "user_refersh_token")
     private String userRefreshToken;
+
+    public void setUserRefreshToken(String userRefreshToken) {
+        this.userRefreshToken = userRefreshToken;
+    }
 
 }

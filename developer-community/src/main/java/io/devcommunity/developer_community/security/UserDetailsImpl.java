@@ -1,6 +1,7 @@
 package io.devcommunity.developer_community.security;
 
 import io.devcommunity.developer_community.domain.entity.Users;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -9,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.ArrayList;
 import java.util.Collection;
 
+@Getter
 @RequiredArgsConstructor
 public class UserDetailsImpl implements UserDetails {
 
@@ -24,12 +26,12 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public String getPassword() {
-        return users.getUserPassword();
+        return this.users.getUserPassword();
     }
 
     @Override
     public String getUsername() {
-        return users.getUserName();
+        return this.users.getUserName();
     }
 
     @Override
@@ -50,5 +52,9 @@ public class UserDetailsImpl implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public Users getUsers(){
+        return this.users;
     }
 }

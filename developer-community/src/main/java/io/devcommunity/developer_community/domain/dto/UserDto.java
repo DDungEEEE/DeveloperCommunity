@@ -19,7 +19,7 @@ public interface UserDto {
 
         private String userNickname;
 
-        private Users.Role role;
+        private Users.Role userRole;
 
         public Users asUser(){
             return Users.builder()
@@ -27,7 +27,7 @@ public interface UserDto {
                     .userEmail(this.userEmail)
                     .userNickname(this.userNickname)
                     .userPassword(this.userPassword)
-                    .role(this.role)
+                    .userRole(this.userRole)
                     .build();
         }
     }
@@ -45,7 +45,7 @@ public interface UserDto {
 
         private String userNickName;
 
-        private Users.Role role;
+        private Users.Role userRole;
 
         public static Result of(Users user){
             return Result.builder()
@@ -54,7 +54,7 @@ public interface UserDto {
                     .userEmail(user.getUserEmail())
                     .userPassword(user.getUserPassword())
                     .userNickName(user.getUserName())
-                    .role(user.getRole())
+                    .userRole(user.getUserRole())
                     .build();
         }
     }

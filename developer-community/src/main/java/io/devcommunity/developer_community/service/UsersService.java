@@ -15,8 +15,8 @@ public class UsersService {
 
     public UserDto.Result signUpUser(UserDto.Create create){
         create.setUserPassword(passwordEncoder.encode(create.getUserPassword()));
-        System.out.println("user Password : " + create.getUserPassword());
         Users user = create.asUser();
+
         Users saveUser = usersRepository.save(user);
         return UserDto.Result.of(saveUser);
     }
