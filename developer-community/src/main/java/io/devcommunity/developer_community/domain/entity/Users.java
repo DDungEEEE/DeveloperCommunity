@@ -10,9 +10,6 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Users {
-    public enum Role{
-            BACKEND, FRONTEND, PM, DESIGNER, MOBILE, ETC
-    }
 
     @Id
     @Column(name = "user_id")
@@ -31,8 +28,9 @@ public class Users {
     @Column(name = "user_nickname", unique = true)
     private String userNickname;
 
-    @Column(name = "user_role")
-    private Role userRole;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "user_role", nullable = false)
+    private UserRole userRole;
 
     @Column(name = "user_refersh_token")
     private String userRefreshToken;

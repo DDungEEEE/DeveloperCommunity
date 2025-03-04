@@ -2,6 +2,7 @@ package io.devcommunity.developer_community.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.devcommunity.developer_community.common.JwtResponseDto;
+import io.devcommunity.developer_community.domain.dto.response.UserResponseDto;
 import io.devcommunity.developer_community.service.LoginService;
 import io.devcommunity.developer_community.service.TokenStorageService;
 import io.devcommunity.developer_community.util.JwtUtil;
@@ -98,6 +99,7 @@ public class LoginAuthenticationFilter extends UsernamePasswordAuthenticationFil
         }
 
         JwtResponseDto jwtResponseDto = JwtResponseDto.builder()
+                .users(UserResponseDto.of(users))
                         .accessToken(userAccessToken)
                         .refreshToken(users.getUserRefreshToken())
                         .build();
@@ -107,7 +109,7 @@ public class LoginAuthenticationFilter extends UsernamePasswordAuthenticationFil
 
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
-        log.error("Authentication failed X, {}", failed.getMessage());
+        log.error("Authentication failed , {}", failed.getMessage());
         response.setStatus(403);
     }
 }

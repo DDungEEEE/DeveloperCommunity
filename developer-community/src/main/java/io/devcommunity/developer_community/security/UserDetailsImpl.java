@@ -54,7 +54,4 @@ public class UserDetailsImpl implements UserDetails {
         return true;
     }
 
-    public Users getUsers(){
-        return this.users;
-    }
 }

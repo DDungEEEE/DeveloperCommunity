@@ -14,7 +14,7 @@ spring:
     open-in-view: false
     show-sql: true
     hibernate:
-#      ddl-auto: update
-      ddl-auto: none
+      ddl-auto: create
+#      ddl-auto: none
 server:
   port: 30000

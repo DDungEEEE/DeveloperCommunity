@@ -1,6 +1,7 @@
 package io.devcommunity.developer_community.service;
 
-import io.devcommunity.developer_community.domain.dto.UserDto;
+import io.devcommunity.developer_community.domain.dto.request.UserCreateReqDto;
+import io.devcommunity.developer_community.domain.dto.response.UserResponseDto;
 import io.devcommunity.developer_community.domain.entity.Users;
 import io.devcommunity.developer_community.repository.UsersRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,11 +14,12 @@ public class UsersService {
     private final UsersRepository usersRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public UserDto.Result signUpUser(UserDto.Create create){
-        create.setUserPassword(passwordEncoder.encode(create.getUserPassword()));
-        Users user = create.asUser();
+    public UserResponseDto signUpUser(UserCreateReqDto userCreateReqDto){
+       userCreateReqDto.setUserPassword(passwordEncoder.encode(userCreateReqDto.getUserPassword()));
+        Users user = userCreateReqDto.asUser();
 
         Users saveUser = usersRepository.save(user);
-        return UserDto.Result.of(saveUser);
+
+        return UserResponseDto.of(saveUser);
     }
 }

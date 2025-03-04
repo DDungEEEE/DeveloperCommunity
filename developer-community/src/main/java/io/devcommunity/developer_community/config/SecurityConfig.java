@@ -61,9 +61,11 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeRequest ->
                         authorizeRequest
                                 .requestMatchers("/swagger", "/swagger-ui.html", "/swagger-ui/**", "/api-docs", "/api-docs/**", "/v3/api-docs/**").permitAll()
-                                .requestMatchers(HttpMethod.POST, "/api/v1/user").permitAll()
-                                .requestMatchers(HttpMethod.POST, "/api/v1/user/login").permitAll()
-                                .requestMatchers("/api/v1/**").hasAnyRole("AUTH")
+                                .requestMatchers( "/").permitAll()
+//                                .requestMatchers(HttpMethod.POST, "/api/v1/user").permitAll()
+//                                .requestMatchers(HttpMethod.POST, "/api/v1/user/login").permitAll()
+//                                .requestMatchers("/api/v1/**").hasAnyRole("AUTH")
+                                .requestMatchers("/**").permitAll()
                                 .anyRequest().authenticated());
 
         httpSecurity.addFilterBefore(loginAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
