@@ -2,6 +2,7 @@ package io.devcommunity.developer_community.domain.dto.request;
 
 import io.devcommunity.developer_community.domain.entity.ProjectMember;
 import io.devcommunity.developer_community.domain.entity.ProjectStatus;
+import io.devcommunity.developer_community.domain.entity.Projects;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -23,4 +24,12 @@ public class ProjectCreateReqDto {
     private ProjectStatus projectStatus;
 
     private List<ProjectMember> members;
+
+    public Projects asProject(){
+        return Projects.builder()
+                .title(this.tile)
+                .description(this.description)
+                .projectStatus(this.projectStatus)
+                .build();
+    }
 }
