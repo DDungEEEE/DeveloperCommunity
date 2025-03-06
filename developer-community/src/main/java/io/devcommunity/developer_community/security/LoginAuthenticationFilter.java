@@ -43,8 +43,6 @@ public class LoginAuthenticationFilter extends UsernamePasswordAuthenticationFil
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         try {
-            log.info("LoginAuthenticationFilter 작동");
-
             UserLoginDto userLoginDto = new ObjectMapper().readValue(request.getInputStream(), UserLoginDto.class);
             String findUserId = userLoginDto.getUserId();
 
