@@ -8,6 +8,14 @@ spring:
     url: ${MYSQL_URL}
     username: ${MYSQL_USERNAME}
     password: ${MYSQL_PASSWORD}
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: ${CLIENT_ID}
+            client-secret: ${CLIENT_SECRET}
+            redirect-uri: "{baseUrl}/login/oauth2/code/github"
 
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect

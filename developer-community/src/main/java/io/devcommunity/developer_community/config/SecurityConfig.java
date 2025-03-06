@@ -2,6 +2,7 @@ package io.devcommunity.developer_community.config;
 
 import io.devcommunity.developer_community.repository.UsersRepository;
 import io.devcommunity.developer_community.security.LoginAuthenticationFilter;
+import io.devcommunity.developer_community.service.GithubOAuth2Service;
 import io.devcommunity.developer_community.service.LoginService;
 import io.devcommunity.developer_community.service.TokenStorageService;
 import io.devcommunity.developer_community.util.JwtUtil;
@@ -33,6 +34,7 @@ public class SecurityConfig {
     private final LoginService loginService;
     private final ResponseWrapper responseWrapper;
     private final TokenStorageService tokenStorageService;
+    private final GithubOAuth2Service githubOAuth2Service;
 
     @Bean
     public ForwardedHeaderFilter filter(){
@@ -67,6 +69,10 @@ public class SecurityConfig {
 //                                .requestMatchers("/api/v1/**").hasAnyRole("AUTH")
                                 .requestMatchers("/**").permitAll()
                                 .anyRequest().authenticated());
+        httpSecurity.oauth2Login()
+                        .defaultSuccessUrl("/")
+                                .userInfoEndpoint()
+                                        .userService(githubOAuth2Service);
 
         httpSecurity.addFilterBefore(loginAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
