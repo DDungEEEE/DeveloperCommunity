@@ -63,16 +63,15 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeRequest ->
                         authorizeRequest
                                 .requestMatchers("/swagger", "/swagger-ui.html", "/swagger-ui/**", "/api-docs", "/api-docs/**", "/v3/api-docs/**").permitAll()
-                                .requestMatchers( "/").permitAll()
 //                                .requestMatchers(HttpMethod.POST, "/api/v1/user").permitAll()
 //                                .requestMatchers(HttpMethod.POST, "/api/v1/user/login").permitAll()
 //                                .requestMatchers("/api/v1/**").hasAnyRole("AUTH")
                                 .requestMatchers("/**").permitAll()
                                 .anyRequest().authenticated());
-        httpSecurity.oauth2Login()
-                        .defaultSuccessUrl("/")
-                                .userInfoEndpoint()
-                                        .userService(githubOAuth2Service);
+        httpSecurity.oauth2Login(oauth2 -> oauth2
+                .defaultSuccessUrl("/success", true)
+                .userInfoEndpoint(userInfo -> userInfo
+                        .userService(githubOAuth2Service)));
 
         httpSecurity.addFilterBefore(loginAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
