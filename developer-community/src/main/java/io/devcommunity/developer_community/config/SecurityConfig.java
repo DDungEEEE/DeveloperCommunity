@@ -71,7 +71,7 @@ public class SecurityConfig {
         httpSecurity.oauth2Login(oauth2 -> oauth2
                 .defaultSuccessUrl("/api/v1/user/success", false));
 
-        
+
         httpSecurity.addFilterBefore(loginAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return httpSecurity.build();

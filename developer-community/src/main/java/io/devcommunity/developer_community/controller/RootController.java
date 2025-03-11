@@ -1,14 +1,19 @@
-//package io.devcommunity.developer_community.controller;
-//
-//import org.springframework.stereotype.Controller;
-//import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.RequestMapping;
-//
-//@Controller
-//@RequestMapping("/")
-//public class RootController {
-//    @GetMapping
-//    public String rootRedirect(){
-//        return "login";
-//    }
-//}
+package io.devcommunity.developer_community.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/")
+public class RootController {
+    @GetMapping
+    public String rootRedirect(){
+        return "login";
+    }
+
+    @GetMapping("/signup")
+    public String signUp(){
+        return "signup";
+    }
+}
