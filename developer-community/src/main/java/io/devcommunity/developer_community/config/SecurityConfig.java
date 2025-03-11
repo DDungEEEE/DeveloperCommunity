@@ -59,7 +59,7 @@ public class SecurityConfig {
         httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session ->
-                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                        session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .authorizeHttpRequests(authorizeRequest ->
                         authorizeRequest
                                 .requestMatchers("/swagger", "/swagger-ui.html", "/swagger-ui/**", "/api-docs", "/api-docs/**", "/v3/api-docs/**").permitAll()
@@ -69,10 +69,9 @@ public class SecurityConfig {
                                 .requestMatchers("/**").permitAll()
                                 .anyRequest().authenticated());
         httpSecurity.oauth2Login(oauth2 -> oauth2
-                .defaultSuccessUrl("/success", true)
-                .userInfoEndpoint(userInfo -> userInfo
-                        .userService(githubOAuth2Service)));
+                .defaultSuccessUrl("/api/v1/user/success", false));
 
+        
         httpSecurity.addFilterBefore(loginAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return httpSecurity.build();

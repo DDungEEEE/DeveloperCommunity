@@ -1,7 +1,7 @@
 package io.devcommunity.developer_community.controller;
 
+import io.devcommunity.developer_community.common.GithubUserDto;
 import io.devcommunity.developer_community.common.JwtResponseDto;
-import io.devcommunity.developer_community.common.OAuth2UserDto;
 import io.devcommunity.developer_community.common.UserLoginDto;
 import io.devcommunity.developer_community.domain.dto.request.UserCreateReqDto;
 import io.devcommunity.developer_community.domain.dto.response.UserResponseDto;
@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,10 +43,13 @@ public class UserController {
         return usersService.signUpUser(userCreateReqDto);
     }
 
-    @GetMapping("/githubLogin")
-    public ResponseEntity<Void> githubAuth2Login(HttpServletResponse res) throws IOException {
-        res.sendRedirect("https://github.com/login?clientid=" );
-        return ResponseEntity.status(HttpStatus.FOUND).build();
+    @GetMapping("/success")
+    public ResponseEntity<GithubUserDto> getUserGitInfo(@AuthenticationPrincipal OAuth2User oAuth2User){
+        if(oAuth2User == null){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
 
+        GithubUserDto githubUserDto = new GithubUserDto(oAuth2User);
+        return ResponseEntity.ok(githubUserDto);
     }
 }

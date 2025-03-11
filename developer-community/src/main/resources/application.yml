@@ -25,5 +25,10 @@ spring:
 #      ddl-auto: create
       ddl-auto: update
 #      ddl-auto: none
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.client.RestTemplate: DEBUG
+    org.springframework.web.reactive.function.client: DEBUG
 server:
   port: 30000
